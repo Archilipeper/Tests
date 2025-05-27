@@ -1,7 +1,9 @@
 from DataStructures.Queue import queue
 from DataStructures.Stack import stack
+from DataStructures.Map import map_linear_probing as map
 
-def new_dfo_search():
+
+def new_dfo_structure(g_order):
     """
     Crea una estructura de busqueda usada en el algoritmo **depth_first_order**.
 
@@ -15,10 +17,13 @@ def new_dfo_search():
     :returns: Estructura de busqueda
     :rtype: dfo_search
     """
-    search = {
+    dfo_structure = {
         'marked': None,
         'pre': queue.new_queue(),
         'post': queue.new_queue(),
         'reversepost': stack.new_stack()
     }
-    return search
+    dfo_structure["marked"] = map.new_map(
+        num_elements=g_order, load_factor=0.5
+    )
+    return dfo_structure
